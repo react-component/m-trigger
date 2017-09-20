@@ -21,6 +21,7 @@ export default interface ITriggerProps {
   onPopupAlign?: Function;
   popupAlign?: any;
   popupVisible?: boolean;
+  defaultPopupVisible?: boolean;
   maskTransitionName?: string | {};
   maskAnimation?: string;
 }
