@@ -63,7 +63,6 @@ import Trigger from 'rmc-trigger';
 
 ReactDOM.render((
   <Trigger
-    action={['click']}
     popup={<span>popup</span>}
     popupAlign={{
       points: ['tl', 'bl'],
