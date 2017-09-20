@@ -16,12 +16,13 @@ export interface IPopupProps {
   destroyPopupOnHide?: boolean;
   className?: string;
   prefixCls?: string;
-  maskTransitionName?: string;
+  maskTransitionName?: string | {};
   maskAnimation?: string;
-  transitionName?: string;
+  transitionName?: string | {};
   animation?: string;
   zIndex?: number;
   mask?: boolean;
+  onAnimateLeave?: Function;
 }
 
 class Popup extends Component<IPopupProps, any> {
@@ -39,7 +40,7 @@ class Popup extends Component<IPopupProps, any> {
   }
 
   componentDidMount() {
-    this.rootNode = ReactDOM.findDOMNode(this.popupInstance);
+    this.rootNode = this.getPopupDomNode();
   }
 
   onAlign = (popupDomNode, align) => {
@@ -52,6 +53,10 @@ class Popup extends Component<IPopupProps, any> {
       popupDomNode.className = this.getClassName(currentAlignClassName);
     }
     props.onAlign!(popupDomNode, align);
+  }
+
+  getPopupDomNode() {
+    return ReactDOM.findDOMNode(this.popupInstance);
   }
 
   getTarget = () => {
@@ -103,6 +108,7 @@ class Popup extends Component<IPopupProps, any> {
         component=""
         exclusive
         transitionAppear
+        onAnimateLeave={props.onAnimateLeave}
         transitionName={this.getTransitionName()}
       >
         {visible ? (<Align
@@ -127,6 +133,7 @@ class Popup extends Component<IPopupProps, any> {
       exclusive
       transitionAppear
       transitionName={this.getTransitionName()}
+      onAnimateLeave={props.onAnimateLeave}
       showProp="xVisible"
     >
       <Align

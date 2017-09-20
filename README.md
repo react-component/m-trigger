@@ -1,4 +1,4 @@
-# rc-trigger
+# rmc-trigger
 ---
 
 React Trigger Component
@@ -10,18 +10,18 @@ React Trigger Component
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-trigger.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-trigger
-[travis-image]: https://img.shields.io/travis/react-component/trigger.svg?style=flat-square
-[travis-url]: https://travis-ci.org/react-component/trigger
-[coveralls-image]: https://img.shields.io/coveralls/react-component/trigger.svg?style=flat-square
+[npm-image]: http://img.shields.io/npm/v/rmc-trigger.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/rmc-trigger
+[travis-image]: https://img.shields.io/travis/react-component/m-trigger.svg?style=flat-square
+[travis-url]: https://travis-ci.org/react-component/m-trigger
+[coveralls-image]: https://img.shields.io/coveralls/react-component/m-trigger.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/trigger?branch=master
-[gemnasium-image]: http://img.shields.io/gemnasium/react-component/trigger.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/react-component/trigger
+[gemnasium-image]: http://img.shields.io/gemnasium/react-component/m-trigger.svg?style=flat-square
+[gemnasium-url]: https://gemnasium.com/react-component/m-trigger
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
-[download-image]: https://img.shields.io/npm/dm/rc-trigger.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-trigger
+[download-image]: https://img.shields.io/npm/dm/rmc-trigger.svg?style=flat-square
+[download-url]: https://npmjs.org/package/rmc-trigger
 
 
 ## Browser Support
@@ -50,7 +50,7 @@ online example: http://react-component.github.io/trigger/examples/
 
 ## install
 
-[![rc-trigger](https://nodei.co/npm/rc-trigger.png)](https://npmjs.org/package/rc-trigger)
+[![rmc-trigger](https://nodei.co/npm/rmc-trigger.png)](https://npmjs.org/package/rmc-trigger)
 
 ## Usage
 
@@ -59,10 +59,10 @@ Include the default [styling](https://github.com/react-component/trigger/blob/ma
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Trigger from 'rc-trigger';
+import Trigger from 'rmc-trigger';
 
 ReactDOM.render((
-  <Trigger 
+  <Trigger
     action={['click']}
     popup={<span>popup</span>}
     popupAlign={{
@@ -108,24 +108,6 @@ ReactDOM.render((
           <td>additional className added to popup according to align</td>
         </tr>
         <tr>
-          <td>action</td>
-          <td>string[]</td>
-          <td>['hover']</td>
-          <td>which actions cause popup shown. enum of 'hover','click','focus'</td>
-        </tr>
-        <tr>
-          <td>mouseEnterDelay</td>
-          <td>number</td>
-          <td>0</td>
-          <td>delay time to show when mouse enter. unit: s.</td>
-        </tr>
-        <tr>
-          <td>mouseLeaveDelay</td>
-          <td>number</td>
-          <td>0.1</td>
-          <td>delay time to hide when mouse leave. unit: s.</td>
-        </tr>
-        <tr>
           <td>popupStyle</td>
           <td>Object</td>
           <td></td>
@@ -134,7 +116,7 @@ ReactDOM.render((
         <tr>
           <td>prefixCls</td>
           <td>String</td>
-          <td>rc-trigger-popup</td>
+          <td>rmc-trigger-popup</td>
           <td>prefix class name</td>
         </tr>
         <tr>
@@ -220,13 +202,13 @@ ReactDOM.render((
           <td>string</td>
           <td></td>
           <td>use preset popup align config from builtinPlacements, can be merged by popupAlign prop</td>
-        </tr>   
+        </tr>
         <tr>
           <td>builtinPlacements</td>
           <td>object</td>
           <td></td>
           <td>builtin placement align map. used by placement prop</td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 
@@ -248,4 +230,4 @@ open coverage/ dir
 
 ## License
 
-rc-trigger is released under the MIT license.
+rmc-trigger is released under the MIT license.

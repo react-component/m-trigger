@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Trigger from 'rmc-trigger';
+import Trigger from '../src/index';
 import 'rmc-trigger/assets/index.less';
 
 const builtinPlacements = {
@@ -57,7 +57,6 @@ class Test extends React.Component<any, any> {
         <div ref={this.saveContainerRef} />
         <Trigger
           popupPlacement="bottom"
-          action={['click']}
           builtinPlacements={builtinPlacements}
           getPopupContainer={() => this.containerInstance}
           popup={<div style={popupBorderStyle}>I am inner Trigger Popup</div>}
@@ -71,14 +70,12 @@ class Test extends React.Component<any, any> {
         <div>
           <Trigger
             popupPlacement="left"
-            action={['click']}
             builtinPlacements={builtinPlacements}
             popup={<div style={popupBorderStyle}>i am a click popup</div>}
           >
             <span>
             <Trigger
               popupPlacement="bottom"
-              action={['hover']}
               builtinPlacements={builtinPlacements}
               popup={<div style={popupBorderStyle}>i am a hover popup</div>}
             >
@@ -90,7 +87,6 @@ class Test extends React.Component<any, any> {
         <div style={{ margin: 50 }}>
           <Trigger
             popupPlacement="right"
-            action={['hover']}
             builtinPlacements={builtinPlacements}
             popup={innerTrigger}
           >

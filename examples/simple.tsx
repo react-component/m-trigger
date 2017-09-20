@@ -1,8 +1,9 @@
 /* eslint no-console:0 */
+/* tslint:disable:no-console */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Trigger from 'rmc-trigger';
+import Trigger from '../src/index';
 import 'rmc-trigger/assets/index.less';
 
 function getPopupAlign(state) {
@@ -211,9 +212,6 @@ class Test extends React.Component<any, any> {
           mask={this.state.mask}
           maskClosable={this.state.maskClosable}
           // maskAnimation="fade"
-          // mouseEnterDelay={0.1}
-          // mouseLeaveDelay={0.1}
-          action={Object.keys(state.trigger)}
           builtinPlacements={builtinPlacements}
           popup={
             <div style={{ border: '1px solid red', padding: 10, background: 'white' }}>
