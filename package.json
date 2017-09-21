@@ -1,6 +1,6 @@
 {
   "name": "rmc-trigger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "base abstract trigger component for react mobile",
   "keywords": [
     "react",
@@ -36,6 +36,7 @@
     }
   },
   "scripts": {
+    "dist": "rc-tools run dist",
     "watch-tsc": "rc-tools run watch-tsc",
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
@@ -55,7 +56,6 @@
     "async": "~1.5.0",
     "expect.js": "0.3.x",
     "jquery": "~1.11.3",
-    "object-assign": "~4.0.1",
     "pre-commit": "1.x",
     "rc-test": "6.x",
     "rc-tools": "6.x",
@@ -68,7 +68,7 @@
   "typings": "./lib/index.d.ts",
   "dependencies": {
     "babel-runtime": "6.x",
-    "rc-align": "2.x",
+    "rmc-align": "~1.0.0",
     "rc-animate": "2.x",
     "rc-util": "4.x"
   }

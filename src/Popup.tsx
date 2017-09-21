@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Align from 'rc-align';
+import Align from 'rmc-align';
 import Animate from 'rc-animate';
 import PopupInner from './PopupInner';
 import LazyRenderBox from './LazyRenderBox';
@@ -128,6 +128,11 @@ class Popup extends Component<IPopupProps, any> {
         </Align>) : null}
       </Animate>);
     }
+
+    const alignOtherProps = {
+      xVisible: visible,
+    };
+
     return (<Animate
       component=""
       exclusive
@@ -141,7 +146,7 @@ class Popup extends Component<IPopupProps, any> {
         key="popup"
         ref={this.saveAlignRef}
         monitorWindowResize
-        xVisible={visible}
+        {...alignOtherProps}
         childrenProps={{ visible: 'xVisible' }}
         disabled={!visible}
         align={align}
