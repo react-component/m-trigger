@@ -130,6 +130,11 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     return className.join(' ');
   }
 
+  saveRef(el, visible) {
+    this._component = el;
+    this.props.afterPopupVisibleChange!(visible);
+  }
+
   getComponent(visible) {
     const props = { ...this.props };
     ['visible', 'onAnimateLeave'].forEach(key => {
@@ -139,7 +144,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     });
     return (
       <Popup
-        ref={el => this._component = el}
+        ref={el => this.saveRef(el, visible)}
         prefixCls={props.prefixCls}
         destroyPopupOnHide={props.destroyPopupOnHide}
         visible={visible}
@@ -188,7 +193,6 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
 
   renderDialog(visible) {
     const props = this.props;
-    const { afterPopupVisibleChange } = props;
     if (!this._container) {
       const popupContainer = document.createElement('div');
       // Make sure default popup container will never cause scrollbar appearing
@@ -202,14 +206,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
       mountNode.appendChild(popupContainer);
       this._container = popupContainer;
     }
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this,
-      this.getComponent(visible),
-      this._container,
-      function callback() {
-        afterPopupVisibleChange!(visible);
-      },
-    );
+    ReactDOM.render(this.getComponent(visible), this._container);
   }
 
   render() {
