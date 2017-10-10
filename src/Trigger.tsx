@@ -67,7 +67,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
         currentDocument = currentDocument || this.props.getDocument!();
         this.touchOutsideHandler = addEventListener(
           currentDocument,
-          'touchstart',
+          'click',
           this.onDocumentClick,
         );
       }

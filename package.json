@@ -1,6 +1,6 @@
 {
   "name": "rmc-trigger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "base abstract trigger component for react mobile",
   "keywords": [
     "react",
@@ -68,8 +68,8 @@
   "typings": "./lib/index.d.ts",
   "dependencies": {
     "babel-runtime": "6.x",
-    "rmc-align": "~1.0.0",
     "rc-animate": "2.x",
-    "rc-util": "4.x"
+    "rc-util": "4.x",
+    "rmc-align": "~1.0.0"
   }
 }
