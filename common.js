@@ -7922,11 +7922,21 @@ var TriggerWrap = function (_React$Component) {
     }
 
     __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default()(TriggerWrap, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.visible !== undefined) {
+                this.setPopupVisible(nextProps.visible);
+            }
+        }
+    }, {
         key: 'setPopupVisible',
         value: function setPopupVisible(visible) {
-            this.setState({
-                popupVisible: visible
-            });
+            if (this.state.popupVisible !== visible) {
+                this.setState({
+                    popupVisible: visible
+                });
+                this.props.onPopupVisibleChange(visible);
+            }
         }
     }, {
         key: 'render',
