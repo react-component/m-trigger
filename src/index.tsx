@@ -47,10 +47,19 @@ class TriggerWrap extends React.Component<ITriggerProps, any> {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible !== undefined) {
+      this.setPopupVisible(nextProps.visible);
+    }
+  }
+
   setPopupVisible(visible) {
-    this.setState({
-      popupVisible: visible,
-    });
+    if (this.state.popupVisible !== visible) {
+      this.setState({
+        popupVisible: visible,
+      });
+      this.props.onPopupVisibleChange!(visible);
+    }
   }
 
   onTargetClick = () => {
