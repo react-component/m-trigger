@@ -61,13 +61,13 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
   componentDidUpdate() {
     this.renderDialog(this.props.visible);
     if (this.props.visible) {
-      let currentDocument;
       // always hide on mobile
       if (!this.touchOutsideHandler) {
-        currentDocument = currentDocument || this.props.getDocument!();
         // add setTimeout for preact
-        setTimeout(() =>
-          this.touchOutsideHandler = addEventListener(currentDocument, 'click', this.onDocumentClick));
+        setTimeout(() => {
+          const currentDocument = this.props.getDocument!();
+          this.touchOutsideHandler = addEventListener(currentDocument, 'click', this.onDocumentClick);
+        });
       }
       return;
     }
