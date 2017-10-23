@@ -6,6 +6,8 @@ import Popup from './Popup';
 import { getAlignFromPlacement, getPopupClassNameFromAlign } from './utils';
 import ITriggerProps from './Proptypes';
 
+const IS_REACT_16 = !!(React as any).createPortal;
+
 function noop() {
 }
 
@@ -41,6 +43,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
   };
 
   touchOutsideHandler: any;
+  popupRef: any;
   _component: any;
   _container: any;
 
@@ -50,16 +53,18 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     }
   }
 
-  shouldComponentUpdate({ visible }) {
-    return !!(this.props.visible || visible);
-  }
-
   componentWillUnmount() {
-    this.renderDialog(false);
+    if (this.props.visible) {
+      if (!IS_REACT_16) {
+        this.renderDialog(false);
+      }
+    }
   }
 
   componentDidUpdate() {
-    this.renderDialog(this.props.visible);
+    if (!IS_REACT_16) {
+      this.renderDialog(this.props.visible);
+    }
     if (this.props.visible) {
       // always hide on mobile
       if (!this.touchOutsideHandler) {
@@ -129,6 +134,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
   }
 
   saveRef(el, visible) {
+    this.popupRef = el;
     this._component = el;
     this.props.afterPopupVisibleChange!(visible);
   }
@@ -142,6 +148,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     });
     return (
       <Popup
+        key="popup"
         ref={el => this.saveRef(el, visible)}
         prefixCls={props.prefixCls}
         destroyPopupOnHide={props.destroyPopupOnHide}
@@ -189,9 +196,9 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     }
   }
 
-  renderDialog(visible) {
-    const props = this.props;
+  getContainer() {
     if (!this._container) {
+      const props = this.props;
       const popupContainer = document.createElement('div');
       // Make sure default popup container will never cause scrollbar appearing
       // https://github.com/react-component/trigger/issues/41
@@ -204,7 +211,15 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
       mountNode.appendChild(popupContainer);
       this._container = popupContainer;
     }
-    ReactDOM.render(this.getComponent(visible), this._container);
+    return this._container;
+  }
+
+  renderDialog(visible) {
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this,
+      this.getComponent(visible),
+      this.getContainer(),
+    );
   }
 
   render() {
@@ -213,7 +228,24 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     const child = React.Children.only(children);
     const newChildProps: any = {
       onClick: this.props.onTargetClick,
+      key: 'trigger',
     };
-    return React.cloneElement(child, newChildProps);
+
+    const trigger = React.cloneElement(child, newChildProps);
+
+    if (!IS_REACT_16) {
+      return trigger;
+    }
+
+    let portal;
+    // prevent unmounting after it's rendered
+    if (props.visible || this._component) {
+      portal = (ReactDOM as any).createPortal(
+        this.getComponent(props.visible),
+        this.getContainer(),
+      );
+    }
+
+    return [trigger, portal];
   }
 }
