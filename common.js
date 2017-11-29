@@ -12658,6 +12658,7 @@ var PopupInner = function (_Component) {
 
 
 
+var IS_REACT_16 = !!__WEBPACK_IMPORTED_MODULE_5_react___default.a.createPortal;
 function noop() {}
 function returnEmptyString() {
     return '';
@@ -12746,27 +12747,31 @@ var Trigger = function (_React$Component) {
             }
         }
     }, {
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(_ref) {
-            var visible = _ref.visible;
-
-            return !!(this.props.visible || visible);
-        }
-    }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            this.renderDialog(false);
+            if (this.props.visible) {
+                if (!IS_REACT_16) {
+                    this.renderDialog(false);
+                }
+            }
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-            this.renderDialog(this.props.visible);
+            var _this2 = this;
+
+            if (!IS_REACT_16) {
+                this.renderDialog(this.props.visible);
+            }
             if (this.props.visible) {
-                var currentDocument = void 0;
                 // always hide on mobile
                 if (!this.touchOutsideHandler) {
-                    currentDocument = currentDocument || this.props.getDocument();
-                    this.touchOutsideHandler = __WEBPACK_IMPORTED_MODULE_8_rc_util_lib_Dom_addEventListener___default()(currentDocument, 'click', this.onDocumentClick);
+                    // add setTimeout for preact
+                    // prevent in here before setTimeout callback
+                    this.touchOutsideHandler = setTimeout(function () {
+                        var currentDocument = _this2.props.getDocument();
+                        _this2.touchOutsideHandler = __WEBPACK_IMPORTED_MODULE_8_rc_util_lib_Dom_addEventListener___default()(currentDocument, 'click', _this2.onDocumentClick);
+                    });
                 }
                 return;
             }
@@ -12792,13 +12797,14 @@ var Trigger = function (_React$Component) {
     }, {
         key: 'saveRef',
         value: function saveRef(el, visible) {
+            this.popupRef = el;
             this._component = el;
             this.props.afterPopupVisibleChange(visible);
         }
     }, {
         key: 'getComponent',
         value: function getComponent(visible) {
-            var _this2 = this;
+            var _this3 = this;
 
             var props = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.props);
             ['visible', 'onAnimateLeave'].forEach(function (key) {
@@ -12808,17 +12814,17 @@ var Trigger = function (_React$Component) {
             });
             return __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_9__Popup__["a" /* default */],
-                { ref: function ref(el) {
-                        return _this2.saveRef(el, visible);
+                { key: 'popup', ref: function ref(el) {
+                        return _this3.saveRef(el, visible);
                     }, prefixCls: props.prefixCls, destroyPopupOnHide: props.destroyPopupOnHide, visible: visible, className: props.popupClassName, align: this.getPopupAlign(), onAlign: props.onPopupAlign, animation: props.popupAnimation, getClassNameFromAlign: this.getPopupClassNameFromAlign, getRootDomNode: this.getRootDomNode, style: props.popupStyle, mask: props.mask, zIndex: props.zIndex, transitionName: props.popupTransitionName, maskAnimation: props.maskAnimation, maskTransitionName: props.maskTransitionName, onAnimateLeave: this.onAnimateLeave },
                 typeof props.popup === 'function' ? props.popup() : props.popup
             );
         }
     }, {
-        key: 'renderDialog',
-        value: function renderDialog(visible) {
-            var props = this.props;
+        key: 'getContainer',
+        value: function getContainer() {
             if (!this._container) {
+                var props = this.props;
                 var popupContainer = document.createElement('div');
                 // Make sure default popup container will never cause scrollbar appearing
                 // https://github.com/react-component/trigger/issues/41
@@ -12830,7 +12836,12 @@ var Trigger = function (_React$Component) {
                 mountNode.appendChild(popupContainer);
                 this._container = popupContainer;
             }
-            __WEBPACK_IMPORTED_MODULE_6_react_dom___default.a.render(this.getComponent(visible), this._container);
+            return this._container;
+        }
+    }, {
+        key: 'renderDialog',
+        value: function renderDialog(visible) {
+            __WEBPACK_IMPORTED_MODULE_6_react_dom___default.a.unstable_renderSubtreeIntoContainer(this, this.getComponent(visible), this.getContainer());
         }
     }, {
         key: 'render',
@@ -12839,9 +12850,19 @@ var Trigger = function (_React$Component) {
             var children = props.children;
             var child = __WEBPACK_IMPORTED_MODULE_5_react___default.a.Children.only(children);
             var newChildProps = {
-                onClick: this.props.onTargetClick
+                onClick: this.props.onTargetClick,
+                key: 'trigger'
             };
-            return __WEBPACK_IMPORTED_MODULE_5_react___default.a.cloneElement(child, newChildProps);
+            var trigger = __WEBPACK_IMPORTED_MODULE_5_react___default.a.cloneElement(child, newChildProps);
+            if (!IS_REACT_16) {
+                return trigger;
+            }
+            var portal = void 0;
+            // prevent unmounting after it's rendered
+            if (props.visible || this._component) {
+                portal = __WEBPACK_IMPORTED_MODULE_6_react_dom___default.a.createPortal(this.getComponent(props.visible), this.getContainer());
+            }
+            return [trigger, portal];
         }
     }]);
 
