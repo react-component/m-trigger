@@ -1,6 +1,6 @@
 {
   "name": "rmc-trigger",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "base abstract trigger component for react mobile",
   "keywords": [
     "react",
