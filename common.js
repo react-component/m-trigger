@@ -12754,6 +12754,7 @@ var Trigger = function (_React$Component) {
                     this.renderDialog(false);
                 }
             }
+            this.clearOutsideHandler();
         }
     }, {
         key: 'componentDidUpdate',
