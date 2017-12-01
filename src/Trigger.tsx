@@ -59,6 +59,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
         this.renderDialog(false);
       }
     }
+    this.clearOutsideHandler();
   }
 
   componentDidUpdate() {
