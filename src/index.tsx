@@ -1,6 +1,6 @@
 import React from 'react';
 import Trigger from './Trigger';
-import ITriggerProps from './Proptypes';
+import ITriggerProps from './PropsType';
 
 function noop() {
 }

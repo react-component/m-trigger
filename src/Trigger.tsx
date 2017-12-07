@@ -4,7 +4,7 @@ import contains from 'rc-util/lib/Dom/contains';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import Popup from './Popup';
 import { getAlignFromPlacement, getPopupClassNameFromAlign } from './utils';
-import ITriggerProps from './Proptypes';
+import ITriggerProps from './PropsType';
 
 const IS_REACT_16 = !!(React as any).createPortal;
 

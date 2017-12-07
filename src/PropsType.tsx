@@ -1,7 +1,7 @@
+import React from 'react';
+
 export default interface ITriggerProps {
   prefixCls?: string;
-  showAction?: any;
-  hideAction?: any;
   getPopupClassNameFromAlign?: any;
   onPopupVisibleChange?: Function;
   afterPopupVisibleChange?: Function;
