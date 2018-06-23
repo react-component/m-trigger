@@ -73,7 +73,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
         // prevent in here before setTimeout callback
         this.touchOutsideHandler = setTimeout(() => {
           const currentDocument = this.props.getDocument!();
-          this.touchOutsideHandler = addEventListener(currentDocument, 'click', this.onDocumentClick);
+          this.touchOutsideHandler = addEventListener(currentDocument, 'touchend', this.onDocumentClick);
         });
       }
       return;
