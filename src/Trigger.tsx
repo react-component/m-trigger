@@ -84,7 +84,9 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
 
   clearOutsideHandler() {
     if (this.touchOutsideHandler) {
-      this.touchOutsideHandler.remove();
+      if (this.touchOutsideHandler.remove) {
+        this.touchOutsideHandler.remove();
+      }
       this.touchOutsideHandler = null;
     }
   }
