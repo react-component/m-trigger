@@ -519,7 +519,7 @@ describe('rmc-trigger', function main() {
             (next) => {
               const popupDomNode = trigger.triggerRef.getPopupDomNode();
               expect(popupDomNode).to.be.ok();
-              expect($(popupDomNode).css('opacity')).not.to.be('1');
+              expect($(popupDomNode).css('opacity')).to.be('0');
               next();
             },
             timeout(500),
@@ -534,7 +534,7 @@ describe('rmc-trigger', function main() {
             (next) => {
               const popupDomNode = trigger.triggerRef.getPopupDomNode();
               expect(popupDomNode).to.be.ok();
-              expect($(popupDomNode).css('opacity')).not.to.be('1');
+              expect($(popupDomNode).css('opacity')).to.be('1');
               next();
             },
             timeout(1000),
