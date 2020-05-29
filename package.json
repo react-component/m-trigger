@@ -68,7 +68,7 @@
   "typings": "./lib/index.d.ts",
   "dependencies": {
     "babel-runtime": "6.x",
-    "rc-animate": "2.x",
+    "rc-animate": "3.x",
     "rc-util": "4.x",
     "rmc-align": "~1.0.0"
   }
