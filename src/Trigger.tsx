@@ -99,6 +99,7 @@ export default class Trigger extends React.Component<ITriggerProps & IProptypes,
     const root = findDOMNode(this);
     const popupNode = this.getPopupDomNode();
     if (!contains(root, target) && !contains(popupNode, target)) {
+      event.preventDefault();
       this.close();
     }
   }
